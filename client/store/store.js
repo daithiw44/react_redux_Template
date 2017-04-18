@@ -1,18 +1,14 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import reducers from '../reducers';
 import { logger, createLogger } from 'redux-logger';
-//middleware;
-//
 
+let superStore = compose(
+    applyMiddleware(createLogger())
+    )(createStore)
 
-  let superStore = compose(
-      applyMiddleware(createLogger())
-      )(createStore)
-
-  export default function configureStore(initialState = {inputText:"hello App",asyncObj:{}}){
-    return superStore(reducers, initialState);
-
-  }
+export default function configureStore(initialState = {inputText:"hello App",asyncObj:{}}){
+  return superStore(reducers, initialState);
+}
 // let logger = (store) => (next) => (actions) => {
 //   console.log(actions);
 //   next();
